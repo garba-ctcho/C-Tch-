@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garba C'tchô - Commandez votre attiéké en ligne</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables CSS pour les thèmes */
+        :root {
+            --primary-color: #FF8C00;
+            --secondary-color: #FFA500;
+            --text-color: #333;
+            --bg-color: #FFF5E6;
+            --card-bg: #FFFFFF;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .dark-theme {
+            --primary-color: #FFA500;
+            --secondary-color: #FF8C00;
+            --text-color: #FFF;
+            --bg-color: #1A1A1A;
+            --card-bg: #2D2D2D;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Header et navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px var(--shadow);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-hand {
+            animation: wave 2s infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-color);
+            background-color: var(--bg-color);
+            transform: scale(1.1);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .hamburger:hover {
+            background-color: var(--bg-color);
+        }
+
+        /* Sections principales */
+        section {
+            padding: 6rem 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--primary-color);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        /* Section Accueil */
+        #accueil {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23FF8C00"/><circle cx="50" cy="50" r="40" fill="%23FFA500"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .home-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .home-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+        }
+
+        .home-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+        }
+
+        .home-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            transition: var(--transition);
+        }
+
+        /* Section Composition */
+        .composition-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .composition-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: var(--transition);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .composition-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow);
+        }
+
+        .composition-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .price-table th, .price-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .price-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .price-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .price-highlight {
+            background-color: rgba(255, 165, 0, 0.1);
+            font-weight: bold;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        /* Section Commande */
+        .command-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: var(--transition);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.2);
+        }
+
+        /* Styles pour les sélecteurs de quantité */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .quantity-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-weight: bold;
+        }
+
+        .quantity-btn:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .quantity-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .quantity-display {
+            min-width: 40px;
+            text-align: center;
+            font-weight: bold;
+            padding: 0.3rem;
+            background-color: var(--bg-color);
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .portion-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            background-color: var(--bg-color);
+            transition: var(--transition);
+        }
+
+        .portion-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portion-price {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Section Groupe */
+        .group-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .group-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: var(--transition);
+        }
+
+        .group-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow);
+        }
+
+        .group-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .group-card p {
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .group-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            color: white;
+        }
+
+        .parents-btn {
+            background-color: #C62828;
+        }
+
+        .parents-btn:hover {
+            background-color: #B71C1C;
+            transform: translateY(-3px);
+        }
+
+        .visitors-btn {
+            background-color: #8D6E63;
+        }
+
+        .visitors-btn:hover {
+            background-color: #6D4C41;
+            transform: translateY(-3px);
+        }
+
+        .students-btn {
+            background-color: #1565C0;
+        }
+
+        .students-btn:hover {
+            background-color: #0D47A1;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card-bg);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 -2px 10px var(--shadow);
+            transition: var(--transition);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Animations 3D au scroll */
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-size: cover;
+            background-position: center;
+            transform: translateZ(-1px) scale(2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--card-bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 2rem;
+                transition: var(--transition);
+                box-shadow: 0 5px 15px var(--shadow);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .nav-right {
+                gap: 0.3rem;
+            }
+
+            .home-title {
+                font-size: 2.5rem;
+            }
+
+            .home-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+            }
+            
+            .logo {
+                font-size: 1.1rem;
+            }
+            
+            .nav-right {
+                gap: 0.2rem;
+            }
+            
+            .theme-toggle, .hamburger {
+                padding: 0.3rem;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header avec navigation -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <span>Garba C'tchô</span>
+                <span class="logo-hand">👋</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#composition">Composition</a></li>
+                <li><a href="#commande">Commande</a></li>
+                <li><a href="#groupe">Rejoindre</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section Accueil -->
+    <section id="accueil">
+        <div class="parallax-bg"></div>
+        <div class="container home-content">
+            <h1 class="home-title">Bienvenue au Garba C'Tchô</h1>
+            <h2 class="home-subtitle">Votre garbadrome préféré</h2>
+            <p class="home-description">
+                Ce site a été créé pour vous permettre de commander votre plat d'attiéké avant d'arriver sur le lieu de vente.
+            </p>
+            <a href="#commande" class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> Commander maintenant
+            </a>
+        </div>
+    </section>
+
+    <!-- Section Composition des plats -->
+    <section id="composition">
+        <div class="container">
+            <h2 class="section-title">Composition des plats</h2>
+            <div class="composition-container">
+                <div class="composition-card">
+                    <h3>🦈 Poisson</h3>
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Prix</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>300 FCFA</td>
+                            </tr>
+                            <tr>
+                                <td>400 FCFA</td>
+                            </tr>
+                            <tr>
+                                <td>500 FCFA</td>
+                            </tr>
+                            <tr>
+                                <td>700 FCFA</td>
+                            </tr>
+                             <tr>
+                                <td>1000 FCFA</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="composition-card">
+                    <h3>🍚 Attiéké</h3>
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Prix</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>200 FCFA</td>
+                            </tr>
+                            <tr>
+                                <td>300 FCFA</td>
+                            </tr>
+                            <tr>
+                                <td>400 FCFA</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="composition-card">
+                    <h3>🍅🧅 Condiments & Extras</h3>
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Ingrédient</th>
+                                <th>Prix</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Oignon</td>
+                                <td>50 FCFA</td>
+                            </tr>
+                            <tr>
+                                <td>Tomates</td>
+                                <td>50 FCFA</td>
+                            </tr>
+                            <tr>
+                                <td>Cube</td>
+                                <td>25 FCFA</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="price-highlight">
+                <p>Avec 500 FCFA, bénéficiez d'un bon plat!</p>
+                <p>Avec 1000 FCFA, bénéficiez d'un bon plat avec un gros poisson!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Passer une commande -->
+    <section id="commande">
+        <div class="container">
+            <h2 class="section-title">Passer une commande</h2>
+            <div class="command-form">
+                <div class="form-group">
+                    <label for="nom">👤 Votre nom</label>
+                    <input type="text" id="nom" placeholder="Votre nom complet" required>
+                </div>
+                <div class="form-group">
+                    <label for="telephone">📱 numéro WhatsApp</label>
+                    <input type="tel" id="telephone" placeholder="Votre numéro de téléphone" required>
+                </div>
+                <div class="form-group">
+                    <label for="heure">⏰ Heure de recuperation</label>
+                    <input type="time" id="heure" required>
+                </div>
+                
+                <!-- Poisson avec sélecteurs de quantité pour chaque portion -->
+                <div class="form-group">
+                    <label>🦈 Poisson (choisissez vos portions)</label>
+                    <div id="poisson-portions">
+                        <!-- Les portions de poisson seront générées dynamiquement -->
+                    </div>
+                </div>
+
+                <!-- Attiéké avec sélecteurs de quantité pour chaque portion -->
+                <div class="form-group">
+                    <label>🍚 Attiéké (choisissez vos portions)</label>
+                    <div id="attieke-portions">
+                        <!-- Les portions d'attiéké seront générées dynamiquement -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="condiments">🍅🧅 Condiments (précisez vos choix)</label>
+                    <textarea id="condiments" rows="3" placeholder="Ex: Oignons 100f, tomates 100f, cube 50f"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="instructions">📝 Instructions spéciales (optionnel)</label>
+                    <textarea id="instructions" rows="3" placeholder="Ex: pas trop d'huile, pas assez de piment, poisson mouillé"></textarea>
+                </div>
+                <button class="whatsapp-btn" id="sendOrder">
+                    <i class="fab fa-whatsapp"></i> Commander via WhatsApp
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Rejoindre un groupe -->
+    <section id="groupe">
+        <div class="container">
+            <h2 class="section-title">Choisissez votre clan</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">
+                Envie de faire partie de la famille Garba C'Tchô? Choisissez votre clan et rejoignez-nous!
+            </p>
+            <div class="group-container">
+                <div class="group-card">
+                    <h3>clan résidents</h3>
+                    <p>Rejoignez notre communauté de résidents pour échanger et être informé.</p>
+                    <a href="https://chat.whatsapp.com/GFG8PqnXHSm2GiSmamo9jL" class="group-btn parents-btn" target="_blank">
+                        <i class="fas fa-users"></i> Rejoindre
+                    </a>
+                </div>
+                <div class="group-card">
+                    <h3>clan visiteurs</h3>
+                    <p>Rejoignez le clan des visiteurs pour être informé.</p>
+                    <a href="https://chat.whatsapp.com/HGCqV0Y7aKX9Cj5DyREVe2" class="group-btn visitors-btn" target="_blank">
+                        <i class="fas fa-users"></i> Rejoindre
+                    </a>
+                </div>
+                <div class="group-card">
+                    <h3>clan Écoliers</h3>
+                    <p>Intégrez le clan Écoliers pour des offres spéciales et événements.</p>
+                    <a href="https://chat.whatsapp.com/CPMkBHVsKrkJ1dSzNwMLG2" class="group-btn students-btn" target="_blank">
+                        <i class="fas fa-graduation-cap"></i> Rejoindre
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">
+                <span>Garba C'Tchô</span>
+                <span class="logo-hand">👋</span>
+            </div>
+            <p>Votre garbadrome préféré - Commandez votre attiéké en ligne</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2023 Garba C'Tchô. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Variables globales
+        const phoneNumber = "+2250576562796";
+
+        // Données des portions
+        const poissonPortions = [
+            { price: 300, label: "300 FCFA" },
+            { price: 400, label: "400 FCFA" },
+            { price: 500, label: "500 FCFA" },
+            { price: 700, label: "700 FCFA" },
+            { price: 1000, label: "1000 FCFA" }
+        ];
+
+        const attiekePortions = [
+            { price: 200, label: "200 FCFA" },
+            { price: 300, label: "300 FCFA" },
+            { price: 400, label: "400 FCFA" }
+        ];
+
+        // Gestion du thème
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.add('theme-changing');
+            
+            setTimeout(() => {
+                document.body.classList.toggle('dark-theme');
+                
+                if (document.body.classList.contains('dark-theme')) {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                } else {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
+                
+                setTimeout(() => {
+                    document.body.classList.remove('theme-changing');
+                }, 500);
+            }, 50);
+        });
+
+        // Menu hamburger
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.querySelector('i').classList.toggle('fa-bars');
+            hamburger.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Fermer le menu en cliquant sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.querySelector('i').classList.add('fa-bars');
+                hamburger.querySelector('i').classList.remove('fa-times');
+            });
+        });
+
+        // Générer les sélecteurs de quantité pour le poisson - AVEC CATÉGORIE
+        const poissonContainer = document.getElementById('poisson-portions');
+        poissonPortions.forEach(portion => {
+            const portionDiv = document.createElement('div');
+            portionDiv.className = 'portion-item';
+            portionDiv.innerHTML = `
+                <div class="portion-info">
+                    <span>${portion.label}</span>
+                </div>
+                <div class="quantity-selector">
+                    <button type="button" class="quantity-btn decrease" data-price="${portion.price}" data-category="poisson">-</button>
+                    <span class="quantity-display" data-price="${portion.price}" data-category="poisson">0</span>
+                    <button type="button" class="quantity-btn increase" data-price="${portion.price}" data-category="poisson">+</button>
+                </div>
+            `;
+            poissonContainer.appendChild(portionDiv);
+        });
+
+        // Générer les sélecteurs de quantité pour l'attiéké - AVEC CATÉGORIE
+        const attiekeContainer = document.getElementById('attieke-portions');
+        attiekePortions.forEach(portion => {
+            const portionDiv = document.createElement('div');
+            portionDiv.className = 'portion-item';
+            portionDiv.innerHTML = `
+                <div class="portion-info">
+                    <span>${portion.label}</span>
+                </div>
+                <div class="quantity-selector">
+                    <button type="button" class="quantity-btn decrease" data-price="${portion.price}" data-category="attieke">-</button>
+                    <span class="quantity-display" data-price="${portion.price}" data-category="attieke">0</span>
+                    <button type="button" class="quantity-btn increase" data-price="${portion.price}" data-category="attieke">+</button>
+                </div>
+            `;
+            attiekeContainer.appendChild(portionDiv);
+        });
+
+        // Gestion des événements pour les boutons de quantité - CORRIGÉ AVEC CATÉGORIE
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('increase')) {
+                const price = e.target.getAttribute('data-price');
+                const category = e.target.getAttribute('data-category');
+                const display = document.querySelector(`.quantity-display[data-price="${price}"][data-category="${category}"]`);
+                let quantity = parseInt(display.textContent);
+                quantity++;
+                display.textContent = quantity;
+                updateButtonState(price, category);
+            } else if (e.target.classList.contains('decrease')) {
+                const price = e.target.getAttribute('data-price');
+                const category = e.target.getAttribute('data-category');
+                const display = document.querySelector(`.quantity-display[data-price="${price}"][data-category="${category}"]`);
+                let quantity = parseInt(display.textContent);
+                if (quantity > 0) {
+                    quantity--;
+                    display.textContent = quantity;
+                }
+                updateButtonState(price, category);
+            }
+        });
+
+        function updateButtonState(price, category) {
+            const display = document.querySelector(`.quantity-display[data-price="${price}"][data-category="${category}"]`);
+            const decreaseBtn = document.querySelector(`.decrease[data-price="${price}"][data-category="${category}"]`);
+            const quantity = parseInt(display.textContent);
+            decreaseBtn.disabled = quantity === 0;
+        }
+
+        // Envoi de commande via WhatsApp - VERSION CORRIGÉE AVEC CATÉGORIE
+        const sendOrderBtn = document.getElementById('sendOrder');
+
+        sendOrderBtn.addEventListener('click', () => {
+            const nom = document.getElementById('nom').value;
+            const telephone = document.getElementById('telephone').value;
+            const heure = document.getElementById('heure').value;
+            const condiments = document.getElementById('condiments').value;
+            const instructions = document.getElementById('instructions').value;
+
+            if (!nom || !telephone || !heure) {
+                alert('Veuillez remplir tous les champs obligatoires');
+                return;
+            }
+
+            // Récupérer les quantités de poisson - AVEC CATÉGORIE
+            let poissonDetails = [];
+            let totalPoisson = 0;
+            
+            const poissonDisplays = document.querySelectorAll('#poisson-portions .quantity-display');
+            poissonDisplays.forEach(display => {
+                const quantity = parseInt(display.textContent);
+                const price = parseInt(display.getAttribute('data-price'));
+                
+                if (quantity > 0) {
+                    const portion = poissonPortions.find(p => p.price === price);
+                    if (portion) {
+                        const subtotal = portion.price * quantity;
+                        poissonDetails.push(`${portion.label} x${quantity} = ${subtotal} FCFA`);
+                        totalPoisson += subtotal;
+                    }
+                }
+            });
+
+            // Récupérer les quantités d'attiéké - AVEC CATÉGORIE
+            let attiekeDetails = [];
+            let totalAttieke = 0;
+            
+            const attiekeDisplays = document.querySelectorAll('#attieke-portions .quantity-display');
+            attiekeDisplays.forEach(display => {
+                const quantity = parseInt(display.textContent);
+                const price = parseInt(display.getAttribute('data-price'));
+                
+                if (quantity > 0) {
+                    const portion = attiekePortions.find(p => p.price === price);
+                    if (portion) {
+                        const subtotal = portion.price * quantity;
+                        attiekeDetails.push(`${portion.label} x${quantity} = ${subtotal} FCFA`);
+                        totalAttieke += subtotal;
+                    }
+                }
+            });
+
+            if (poissonDetails.length === 0 && attiekeDetails.length === 0) {
+                alert('Veuillez sélectionner au moins une portion de poisson ou d\'attiéké');
+                return;
+            }
+
+            const message = `🍽️ NOUVELLE COMMANDE GARBA C'TCHÔ 🍽️
+
+👤 NOM: ${nom}
+📱 TÉLÉPHONE: ${telephone}
+⏰ HEURE DE RETRAIT: ${heure}
+
+${poissonDetails.length > 0 ? `🦈 POISSON:\n${poissonDetails.join('\n')}` : ''}
+${attiekeDetails.length > 0 ? `🍚 ATTIÉKÉ:\n${attiekeDetails.join('\n')}` : ''}
+🍅🧅 CONDIMENTS: ${condiments || 'Aucun'}
+
+${instructions ? `📝 INSTRUCTIONS SPÉCIALES:\n${instructions}` : ''}
+
+💰 TOTAL(sans condiments): ${totalPoisson + totalAttieke} FCFA
+
+merci bien !`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            window.open(whatsappURL, '_blank');
+        });
+
+        // Animation au scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const scrollPosition = window.scrollY;
+
+            if (scrollPosition > 100) {
+                header.style.padding = '0.5rem 0';
+                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.padding = '1rem 0';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+
+            // Animation des cartes
+            const cards = document.querySelectorAll('.composition-card, .group-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (cardTop < windowHeight - 100) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Initialiser l'opacité des cartes et les états des boutons
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.composition-card, .group-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+
+            // Initialiser les états des boutons
+            poissonPortions.forEach(portion => {
+                updateButtonState(portion.price, 'poisson');
+            });
+            attiekePortions.forEach(portion => {
+                updateButtonState(portion.price, 'attieke');
+            });
+
+            // Déclencher l'animation après un court délai
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 100);
+        });
+    </script>
+</body>
+</html>
